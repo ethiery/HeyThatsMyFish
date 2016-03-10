@@ -1,0 +1,48 @@
+Makefile rules
+==============
+
+main files:
+-----------
+
+make [all]                      builds server (banquise) and all strategies (*.so)
+make banquise                   builds server (banquise)
+make strats                     builds all strategies (*.so)
+make lib_strat_rand.so          builds the strategy which is acting randomly (*.so)
+       ...some more comming soon...
+
+tools:
+------
+
+make double		copies each strategy lib_strat_name.so to lib_strat_name2.so, in order to be able to use a strategy against itself
+make clean              removes all *.o
+make mrproper           removes server (banquise), all strategies (*.so),
+                        and temporary files (*~, #*#)
+make tests              builds test.run: an program running tests (cf. section About tests)
+
+
+About tests
+===========
+
+make test_server        builds a program (test_server) running tests from test_server.c
+make test_strats        builds a program (test_strats) running manual tests from test_print.c, and the needed strategies (*.so).
+
+%% The test_strat.c file has for the moment no rule of compilation in the Makefile. It needs to be compilated with graph.c and strat.c
+
+Lauching banquise
+=================
+
+In order to launch banquise, the following needs to be typed:
+./banquise [nb_penguin_by_player] [map_shape] [map_height] [map_width] ./strategies(.so) ... 
+
+nb_penguin_by player	sets players' initial number of penguins; must be an unsigned int
+map_shape     		sets map's type; can be of three types:
+		       	      - full-tetra   	map fully made of squares
+		       	      - full-hexa    	map fully made of hexagones
+		       	      - octo-tetra   	map made of octogones and squares
+map_height              set's map's height; must be an unsigned int
+map_width		set's map's width; must be an unsigned int
+strategies(.so) 	each strategy defines a player; must be at least two strategies
+				   
+Notes:
+------
+	the "./" in front of each strategie's name is very important
